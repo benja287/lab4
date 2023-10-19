@@ -1,9 +1,5 @@
-<h2 class="py-2 mb-0">Lista de Tweets</h2>
+<h2 class="py-2 mb-0">Inicio</h2>
 
-<ul class="list-group">
-  <% @tweets.each do |tweet| %>
-    <li class="list-group-item">
-      <%= render partial: 'tweets/tweet', locals: { tweet: tweet } %>
-    </li>
-  <% end %>
-</ul>
+<% @tweets.each do |tweet| %>
+  <%= render tweet %>
+<% end %>

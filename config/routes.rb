@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
-  resources :monsters, only: [:index, :show] do
-    resources :tweets, except: [:edit, :update]  # Excluye las rutas de edición y actualización
-  end
+  resources :monsters, only: [:index, :show]
 
-  root "tweets#index"  # Ruta raíz
+  root "tweets#index"
 
-  # Agregar una ruta específica para los tweets
-  resources :tweets, only: [:show, :new, :create, :destroy]  # Excluye las rutas de edición y actualización
+  get '/tweets', to: 'tweets#index', as: 'tweets'   #para poder hacer @tweets(con tweets variable asignada en el
+                                                    #controlador del tweet)
+  get '/tweets/new', to: 'tweets#new'
+  post '/tweets', to: 'tweets#create'
+  get '/tweets/:id', to: 'tweets#show', as: 'tweet' #para poder hacer @tweet(con tweet variable asignada en el
+                                                    #controlador del tweet)
+  get '/tweets/:id/edit', to: 'tweets#edit'
+  put '/tweets/:id', to: 'tweets#update'
+  patch '/tweets/:id', to: 'tweets#update'
+  delete '/tweets/:id', to: 'tweets#destroy'
+
+  
 end

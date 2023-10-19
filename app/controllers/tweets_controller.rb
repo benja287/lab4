@@ -1,28 +1,28 @@
 class TweetsController < ApplicationController
-  def index
-   @tweets = Tweet.order(created_at: :desc)
- end
 
-  def new
-    @tweet = Tweet.new
-    @monster = Monster.find(params[:monster_id])
+  def index
+    @tweets = Tweet.order(created_at: :desc)
+  end
+
+  def show
+   @tweet = Tweet.find(params[:id])
   end
 
   def create
     @tweet = Tweet.new(tweet_params)
-    @monster = Monster.find(params[:monster_id])
-    @tweet.monster = @monster
+
 
     if @tweet.save
-      redirect_to monster_path(@monster)  # Redirige de vuelta al monstruo después de crear el tweet
+      redirect_to @tweet
     else
-      render 'new'
+      render :new, status: :see_other
     end
   end
 
   private
 
   def tweet_params
-    params.require(:tweet).permit(:content)
+    params.require(:tweet).permit(:content, :monster_id)
   end
+
 end
