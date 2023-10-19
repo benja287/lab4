@@ -1,1 +1,24 @@
-<%# Update me %><%= @monsters.inspect %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Monstruos</title>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+</head>
+<body>
+  <h1>Lista de Monstruos</h1>
+
+  <ul>
+    <% @monsters.each do |monster| %>
+      <li>
+        <h2>
+          <%= link_to monster.name, monster %>
+          <% if monster.tweets.count > 1 %>
+            <span class="twitter-highlight">Twitero Destacado</span>
+          <% end %>
+        </h2>
+        <p><%= monster.description %></p>
+      </li>
+    <% end %>
+  </ul>
+</body>
+</html>

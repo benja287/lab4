@@ -1,1 +1,34 @@
-<%# Update me %><%= @monster.inspect %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= @monster.name %></title>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+</head>
+<body>
+  <div class="container">
+    <div class="row">
+      <!-- Columna 1: Información del Monstruo -->
+      <div class="col-md-6">
+        <h1><%= @monster.name %></h1>
+        <p><%= @monster.description %></p>
+
+        <%= link_to "Volver", monsters_path, class: "btn btn-primary" %>
+
+        <%= form_with(model: @monster, local: true, method: :delete, data: { confirm: "¿Estás seguro de que deseas eliminar a este monstruo?" }) do |form| %>
+          <%= form.submit "Eliminar monstruo", class: "btn btn-danger" %>
+        <% end %>
+      </div>
+
+      <!-- Columna 2: Listado de Tweets del Monstruo -->
+      <div class="col-md-6">
+        <h2>Tweets del Monstruo</h2>
+        <ul>
+          <% @monster.tweets.each do |tweet| %>
+            <li><%= tweet.content %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
